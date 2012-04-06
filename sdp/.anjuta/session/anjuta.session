@@ -1,0 +1,29 @@
+
+[Anjuta]
+Maximized=1
+Geometry=1678x990+0+30
+
+[Project Manager]
+Shortcut=sdp//sdp//src//sdp
+
+[File Loader]
+Files=file:///home/kev/sdp/src/sdp.c#4%%%file:///home/kev/sdp/src/main.c#46%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui
+
+[Document Manager]
+bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
+
+[Execution]
+Program uri=file:///home/kev/sdp/Debug/src/sdp
+Run in terminal=2
+Working directories=file:///home/kev/sdp
+
+[Build]
+Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Optimized
+Selected Configuration=Debug
+BuildArgs/Default=--enable-maintainer-mode
+BuildArgs/Debug=--enable-maintainer-mode 'CFLAGS=-g -O0' 'CXXFLAGS=-g -O0' 'JFLAGS=-g -O0' 'FFLAGS=-g -O0'
+BuildArgs/Profiling=--enable-maintainer-mode 'CFLAGS=-g -pg' 'CXXFLAGS=-g -pg' 'JFLAGS=-g -pg' 'FFLAGS=-g -pg'
+BuildArgs/Optimized=--enable-maintainer-mode 'CFLAGS=-O2' 'CXXFLAGS=-O2' 'JFLAGS=-O2' 'FFLAGS=-O2'
+
+[Debugger]
+Stop at beginning=2
