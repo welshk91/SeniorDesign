@@ -4,10 +4,10 @@ Dependencies:
 gcc
 
 To Compile:
-gcc -Wall -g test.c
+Incomplete
 
 Usage:
-./a.out
+Incomplete
 
 Goal:
 The purpose of this game is to provide a fun experience that also is educational. It should introduce concepts while still remaining engaging.
