@@ -32,9 +32,10 @@ GtkWidget *window;
 GtkWidget *window2;
 GtkWidget *window3;
 
-//Needed to update Stats page
+//Needed to update Stats page and turn label
 GtkTextBuffer *buffer3;
 GtkWidget *stats;
+GtkWidget *turnsLeft;
 GtkTextIter iter3;
 
 //Levels
@@ -53,6 +54,7 @@ int plantE = 0;
 int plantF = 0;
 int numberTurns = 0;
 int numberActions = 0;
+int turnCountdown = 50;
 
 //Buffers that can carry 4 digit numbers
 char oxygenBuf[4];
@@ -68,6 +70,7 @@ char eBuf[4];
 char fBuf[4];
 char turnsBuf[4];
 char actionsBuf[4];
+char countdownBuf[4];
 
 //Entries for the Text Views
 gchar *statsEntry;
@@ -206,7 +209,7 @@ static void acceptTime (void)
 	GtkBuilder *builder;
 	GError* error = NULL;
 	
-	// Load UI from file /
+	// Load UI from file
 	builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_file (builder, UI_STATUS, &error))
 	{
@@ -344,6 +347,7 @@ static void acceptTime (void)
 				//plantL++;
 			}
 
+			turnCountdown = turnCountdown - 1;
 			numberActions = numberActions + numChoices;
 			numberTurns++;
 			break;
@@ -365,7 +369,6 @@ static void acceptTime (void)
 	gtk_widget_destroy (label);
 	gtk_widget_destroy (contentArea);
 	gtk_widget_destroy (dialog);
-
 
 	/*Update Stats Screen*/
 	//Make a string with the integer values
@@ -404,6 +407,12 @@ static void acceptTime (void)
 	
 	gtk_text_buffer_set_text (buffer3,statsEntry,-1);
 
+	/*Update Turns Left*/
+	turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));
+	sprintf(countdownBuf, "%d turn countdown", turnCountdown);
+	gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
+	
+	printf("COUNTDOWN: %d \n",turnCountdown);
 
 	
 }//end of AcceptTime
@@ -436,6 +445,12 @@ static void continueTime(void)
 	GtkWidget *soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 	gtk_image_set_from_file (GTK_IMAGE (soilImage), "src/crappy_soil.jpg");
 
+	/*Turns label*/
+	//turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));
+	//sprintf(countdownBuf, "%d Turns Left", turnCountdown);
+	//gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
+	
+	
 	/*Text View for Almanac Tab*/
 	stats = GTK_WIDGET(gtk_builder_get_object(builder,"textview1"));
 	buffer3 = gtk_text_view_get_buffer(GTK_TEXT_VIEW(stats));
