@@ -2,12 +2,12 @@
 /*
  * sdp.c
  * Copyright (C) Kevin Welsh 2012 <kcwelsh@mtu.edu>, <welshk91@gmail.com>
- * 
+	 * 
  * sdp is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+	 * 
  * sdp is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -107,9 +107,9 @@ static void exitTime (void)
 //Method for Toggle Buttons to listen for clicks
 void toggle_button_callback (GtkWidget *widget, gpointer data)
 {
-	
-    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
-        /* If control reaches here, the toggle button is down */
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+		/* If control reaches here, the toggle button is down */
 		//printf("GTKWidget %s is down \n", gtk_button_get_label (GTK_BUTTON(widget)));
 
 		/*Change variable 'picked' to true*/
@@ -149,12 +149,12 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"?????")==0){
 			pickedL = 1;
 		}
-		
+
 		numChoices++;
 	} 
-	
+
 	else {
-        /* If control reaches here, the toggle button is up */
+		/* If control reaches here, the toggle button is up */
 		//printf("GTKWidget %s is up \n", gtk_button_get_label (GTK_BUTTON(widget)));
 
 		/*Change variable 'picked' to false*/
@@ -194,12 +194,12 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"?????")==0){
 			pickedL = 0;
 		}
-		
+
 		numChoices--;
 	}
 
 	//printf("COUNT:%d \n", numChoices);
-	
+
 }
 
 //Method for Accept
@@ -208,7 +208,7 @@ static void acceptTime (void)
 
 	GtkBuilder *builder;
 	GError* error = NULL;
-	
+
 	// Load UI from file
 	builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_file (builder, UI_STATUS, &error))
@@ -217,204 +217,202 @@ static void acceptTime (void)
 		g_error_free (error);
 	}
 
-	/*Connect Buttons in UI File with variables*/
-	/*
-	GtkToggleButton *btnA = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonA"));
-	GtkToggleButton *btnB = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonB"));
-	GtkToggleButton *btnC = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonC"));
-	GtkToggleButton *btnD = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonD"));
-	GtkToggleButton *btnE = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonE"));
-	GtkToggleButton *btnF = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonF"));
-	GtkToggleButton *btnG = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonG"));
-	GtkToggleButton *btnH = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonH"));
-	GtkToggleButton *btnI = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonI"));
-	GtkToggleButton *btnJ = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonJ"));
-	GtkToggleButton *btnK = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonK"));
-	GtkToggleButton *btnL = GTK_TOGGLE_BUTTON(gtk_builder_get_object (builder,"togglebuttonL"));
-*/
-	
-	/*Connect toggle buttons with signals*/
-	//g_signal_connect(btnA,"toggled",G_CALLBACK(toggle_button_callback),btnA);
-	//g_signal_connect(btnB,"toggled",G_CALLBACK(toggle_button_callback),btnB);
-	//g_signal_connect(btnC,"toggled",G_CALLBACK(toggle_button_callback),btnC);
-	//g_signal_connect(btnD,"toggled",G_CALLBACK(toggle_button_callback),btnD);	
-	//g_signal_connect(btnE,"toggled",G_CALLBACK(toggle_button_callback),btnE);
-	//g_signal_connect(btnF,"toggled",G_CALLBACK(toggle_button_callback),btnF);
-	//g_signal_connect(btnG,"toggled",G_CALLBACK(toggle_button_callback),btnG);
-	//g_signal_connect(btnH,"toggled",G_CALLBACK(toggle_button_callback),btnH);
-	//g_signal_connect(btnI,"toggled",G_CALLBACK(toggle_button_callback),btnI);
-	//g_signal_connect(btnJ,"toggled",G_CALLBACK(toggle_button_callback),btnJ);
-	//g_signal_connect(btnK,"toggled",G_CALLBACK(toggle_button_callback),btnK);
-	
 	// Auto-connect signal handlers /
 	gtk_builder_connect_signals (builder, NULL);
-	
-	//TEST ACTIVE/INACTIVE
-	/*if(oxygenLvl>10){
-		printf("\nDEACTIVATE\n");
-		gtk_widget_set_can_focus (GTK_WIDGET(btnA),FALSE);
-		gtk_widget_set_sensitive (GTK_WIDGET(btnB),FALSE);
-		gtk_widget_set_visible (GTK_WIDGET(btnC),FALSE);
-		gtk_toggle_button_set_active (btnD,FALSE);
-		gtk_toggle_button_set_inconsistent (btnE,FALSE);
-	}*/
 
-	/* Create the widgets */
-	GtkWidget *dialog, *label, *contentArea;
-	dialog = gtk_dialog_new_with_buttons ("Confirm Choice...",
-                                         GTK_WINDOW(gtk_builder_get_object(builder,"window3")),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_STOCK_CANCEL,
-                                         GTK_RESPONSE_CANCEL,
-                                         GTK_STOCK_OK,
-                                         GTK_RESPONSE_OK,
-                                         NULL);
-	contentArea = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-	label = gtk_label_new ("Are you sure you wish to continue?\n");
+	//You picked too many choices for a turn
+	if(numChoices>2){
 
-	/* Add the label, and show everything we've added to the dialog. */
-	gtk_container_add (GTK_CONTAINER (contentArea), label);
-	gtk_widget_show(contentArea);
-	gtk_widget_show(label);
-	gint dialogResult = gtk_dialog_run (GTK_DIALOG(dialog));
+		/* Auto-connect signal handlers */
+		gtk_builder_connect_signals (builder, NULL);
 
-	/*Handle dialog decisions*/
-	switch(dialogResult){
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtk_builder_get_object(builder,"window1")),
+		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,    
+		                                 "You picked too many choices for a single turn!\nYou can only pick two.");
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 
-		//Accept Button was Pressed
-		case GTK_RESPONSE_OK:
-			printf("You chose %d actions \n", numChoices);
-
-			//Display choices the user made
-			if(pickedA){
-				printf("You chose Plant A \n");
-				oxygenLvl = oxygenLvl + 5;
-				plantA++;
-			}
-			if(pickedB){
-				printf("You chose Plant B \n");
-				phosphorusLvl = phosphorusLvl + 10;
-				plantB++;
-			}
-			if(pickedC){
-				printf("You chose Plant C \n");
-				carbonLvl = carbonLvl + 5;
-				plantC++;
-			}
-			if(pickedD){
-				printf("You chose Plant D \n");
-				nitrogenLvl = nitrogenLvl + 15;
-				plantD++;
-			}
-			if(pickedE){
-				printf("You chose Plant E \n");
-				waterLvl = waterLvl + 5;
-				plantE++;
-			}
-			if(pickedF){
-				printf("You chose Plant F \n");
-				oxygenLvl = oxygenLvl + 10;
-				plantF++;
-			}
-			if(pickedG){
-				printf("You chose Trees \n");
-				waterLvl = waterLvl + 5;
-				//plantG++;
-			}
-			if(pickedH){
-				printf("You chose Bushes \n");
-				phosphorusLvl = phosphorusLvl - 5;
-				//plantH++;
-			}
-			if(pickedI){
-				printf("You chose ??? \n");
-				carbonLvl = carbonLvl - 10;
-				//plantI++;
-			}
-			if(pickedJ){
-				printf("You chose Toil \n");
-				waterLvl = waterLvl - 5;
-				//plantJ++;
-			}
-			if(pickedK){
-				printf("You chose Water \n");
-				nitrogenLvl = nitrogenLvl - 10;
-				//plantK++;
-			}
-			if(pickedL){
-				printf("You chose ?????  \n");
-				oxygenLvl = oxygenLvl - 5;
-				//plantL++;
-			}
-
-			turnCountdown = turnCountdown - 1;
-			numberActions = numberActions + numChoices;
-			numberTurns++;
-			break;
-
-		//Cancel Button was Pressed
-		case GTK_RESPONSE_CANCEL:
-			printf("boo \n");
-			exitTime();
-			break;
-				
-		//Unexpected Response
-		default:
-			printf("UNEXPECTED DIALOG ERROR\n");
-			exit(2);
-			break;
 	}
 
-	//Destroy Dialog Box after response
-	gtk_widget_destroy (label);
-	gtk_widget_destroy (contentArea);
-	gtk_widget_destroy (dialog);
+	//You picked too few choices
+	else if(numChoices<2){
+		/* Auto-connect signal handlers */
+		gtk_builder_connect_signals (builder, NULL);
 
-	/*Update Stats Screen*/
-	//Make a string with the integer values
-	sprintf(oxygenBuf, "%d", oxygenLvl);
-	sprintf(carbonBuf, "%d", carbonLvl);
-	sprintf(phosphorusBuf, "%d", phosphorusLvl);
-	sprintf(nitrogenBuf, "%d", nitrogenLvl);
-	sprintf(waterBuf, "%d", waterLvl);
-	sprintf(aBuf, "%d", plantA);
-	sprintf(bBuf, "%d", plantB);
-	sprintf(cBuf, "%d", plantC);
-	sprintf(dBuf, "%d", plantD);
-	sprintf(eBuf, "%d", plantE);
-	sprintf(fBuf, "%d", plantF);
-	sprintf(turnsBuf, "%d", numberTurns);
-	sprintf(actionsBuf, "%d", numberActions);
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtk_builder_get_object(builder,"window1")),
+		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,    
+		                                 "You picked too few choices for a single turn!\nYou can only pick two.");
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		
+	}
 
-	//The text displayed in Stats
-	statsEntry = g_strconcat("\t\tStats\n\n\
-\tLevels\n\
-\tOxygen: ", oxygenBuf, "\n\
-\tCarbon: ", carbonBuf, "\n\
-\tPhosphorus: ", phosphorusBuf,"\n\
-\tNitrogen: ", nitrogenBuf,"\n\
-\tWater: ", waterBuf,"\n\n\
-\tPlants\n\
-\tPlant A: ", aBuf,"\n\
-\tPlant B: ", bBuf,"\n\
-\tPlant C: ", cBuf,"\n\
-\tPlant D: ", dBuf,"\n\
-\tPlant E: ", eBuf,"\n\
-\tPlant F: ", fBuf,"\n\n\
-\tMisc\n\
-\tTurns Done: ", turnsBuf,"\n\
-\tActions Done: ", actionsBuf,"\n", NULL);
-	
-	gtk_text_buffer_set_text (buffer3,statsEntry,-1);
+	//You picked the right amount
+	else{
 
-	/*Update Turns Left*/
-	turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));
-	sprintf(countdownBuf, "%d turn countdown", turnCountdown);
-	gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
-	
-	printf("COUNTDOWN: %d \n",turnCountdown);
+		/* Create the dialog confirmation box */
+		GtkWidget *dialog, *label, *contentArea;
+		dialog = gtk_dialog_new_with_buttons ("Confirm Choice...",
+		                                      GTK_WINDOW(gtk_builder_get_object(builder,"window3")),
+		                                      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                      GTK_STOCK_CANCEL,
+		                                      GTK_RESPONSE_CANCEL,
+		                                      GTK_STOCK_OK,
+		                                      GTK_RESPONSE_OK,
+		                                      NULL);
+		contentArea = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+		label = gtk_label_new ("Are you sure you wish to continue?\n");
 
-	
+		/* Add the label, and show everything we've added to the dialog. */
+		gtk_container_add (GTK_CONTAINER (contentArea), label);
+		gtk_widget_show(contentArea);
+		gtk_widget_show(label);
+		gint dialogResult = gtk_dialog_run (GTK_DIALOG(dialog));
+
+		/*Handle dialog decisions*/
+		switch(dialogResult){
+
+			//Accept Button was Pressed
+			case GTK_RESPONSE_OK:
+				printf("You chose %d actions \n", numChoices);
+
+				//Display choices the user made
+				if(pickedA){
+					printf("You chose Plant A \n");
+					oxygenLvl = oxygenLvl + 5;
+					plantA++;
+				}
+				if(pickedB){
+					printf("You chose Plant B \n");
+					phosphorusLvl = phosphorusLvl + 10;
+					plantB++;
+				}
+				if(pickedC){
+					printf("You chose Plant C \n");
+					carbonLvl = carbonLvl + 5;
+					plantC++;
+				}
+				if(pickedD){
+					printf("You chose Plant D \n");
+					nitrogenLvl = nitrogenLvl + 15;
+					plantD++;
+				}
+				if(pickedE){
+					printf("You chose Plant E \n");
+					waterLvl = waterLvl + 5;
+					plantE++;
+				}
+				if(pickedF){
+					printf("You chose Plant F \n");
+					oxygenLvl = oxygenLvl + 10;
+					plantF++;
+				}
+				if(pickedG){
+					printf("You chose Trees \n");
+					waterLvl = waterLvl + 5;
+					//plantG++;
+				}
+				if(pickedH){
+					printf("You chose Bushes \n");
+					phosphorusLvl = phosphorusLvl - 5;
+					//plantH++;
+				}
+				if(pickedI){
+					printf("You chose ??? \n");
+					carbonLvl = carbonLvl - 10;
+					//plantI++;
+				}
+				if(pickedJ){
+					printf("You chose Toil \n");
+					waterLvl = waterLvl - 5;
+					//plantJ++;
+				}
+				if(pickedK){
+					printf("You chose Water \n");
+					nitrogenLvl = nitrogenLvl - 10;
+					//plantK++;
+				}
+				if(pickedL){
+					printf("You chose ?????  \n");
+					oxygenLvl = oxygenLvl - 5;
+					//plantL++;
+				}
+
+				turnCountdown = turnCountdown - 1;
+				numberActions = numberActions + numChoices;
+				numberTurns++;
+				break;
+
+				//Cancel Button was Pressed
+			case GTK_RESPONSE_CANCEL:
+				printf("boo \n");
+				exitTime();
+				break;
+
+				//Unexpected Response
+			default:
+				printf("UNEXPECTED DIALOG ERROR\n");
+				exit(2);
+				break;
+		}
+
+		//Destroy Dialog Box after response
+		gtk_widget_destroy (label);
+		gtk_widget_destroy (contentArea);
+		gtk_widget_destroy (dialog);
+
+		/*Update Stats Screen*/
+		//Make a string with the integer values
+		sprintf(oxygenBuf, "%d", oxygenLvl);
+		sprintf(carbonBuf, "%d", carbonLvl);
+		sprintf(phosphorusBuf, "%d", phosphorusLvl);
+		sprintf(nitrogenBuf, "%d", nitrogenLvl);
+		sprintf(waterBuf, "%d", waterLvl);
+		sprintf(aBuf, "%d", plantA);
+		sprintf(bBuf, "%d", plantB);
+		sprintf(cBuf, "%d", plantC);
+		sprintf(dBuf, "%d", plantD);
+		sprintf(eBuf, "%d", plantE);
+		sprintf(fBuf, "%d", plantF);
+		sprintf(turnsBuf, "%d", numberTurns);
+		sprintf(actionsBuf, "%d", numberActions);
+
+		//The text displayed in Stats
+		statsEntry = g_strconcat("\t\tStats\n\n\
+	\tLevels\n\
+	\tOxygen: ", oxygenBuf, "\n\
+	\tCarbon: ", carbonBuf, "\n\
+	\tPhosphorus: ", phosphorusBuf,"\n\
+	\tNitrogen: ", nitrogenBuf,"\n\
+	\tWater: ", waterBuf,"\n\n\
+	\tPlants\n\
+	\tPlant A: ", aBuf,"\n\
+	\tPlant B: ", bBuf,"\n\
+	\tPlant C: ", cBuf,"\n\
+	\tPlant D: ", dBuf,"\n\
+	\tPlant E: ", eBuf,"\n\
+	\tPlant F: ", fBuf,"\n\n\
+	\tMisc\n\
+	\tTurns Done: ", turnsBuf,"\n\
+	\tActions Done: ", actionsBuf,"\n", NULL);
+
+		gtk_text_buffer_set_text (buffer3,statsEntry,-1);
+
+		/*Update Turns Left*/
+		turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));
+		sprintf(countdownBuf, "%d turn countdown", turnCountdown);
+		gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
+
+		printf("COUNTDOWN: %d \n",turnCountdown);
+
+	}
+
 }//end of AcceptTime
 
 //Method for Continue
@@ -423,7 +421,7 @@ static void continueTime(void)
 
 	GtkBuilder *builder;
 	GError* error = NULL;
-	
+
 	/* Load UI from file */
 	builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_file (builder, UI_STATUS, &error))
@@ -437,7 +435,7 @@ static void continueTime(void)
 
 	/*Connect Buttons in UI File with variables*/
 	GtkWidget *btnAccept = GTK_WIDGET(gtk_builder_get_object (builder,"buttonAccept"));
-	
+
 	/*Connect Continue button with 'continueTime' function*/
 	g_signal_connect(btnAccept,"clicked",G_CALLBACK(acceptTime), NULL);
 
@@ -449,13 +447,13 @@ static void continueTime(void)
 	//turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));
 	//sprintf(countdownBuf, "%d Turns Left", turnCountdown);
 	//gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
-	
-	
+
+
 	/*Text View for Almanac Tab*/
 	stats = GTK_WIDGET(gtk_builder_get_object(builder,"textview1"));
 	buffer3 = gtk_text_view_get_buffer(GTK_TEXT_VIEW(stats));
 	gtk_text_buffer_get_iter_at_offset(buffer3, &iter3, 0);
-	
+
 	//Make a string with the integer values
 	sprintf(oxygenBuf, "%d", oxygenLvl);
 	sprintf(carbonBuf, "%d", carbonLvl);
@@ -473,26 +471,26 @@ static void continueTime(void)
 
 	//The text displayed in Stats
 	statsEntry = g_strconcat("\t\tStats\n\n\
-\tLevels\n\
-\tOxygen: ", oxygenBuf, "\n\
-\tCarbon: ", carbonBuf, "\n\
-\tPhosphorus: ", phosphorusBuf,"\n\
-\tNitrogen: ", nitrogenBuf,"\n\
-\tWater: ", waterBuf,"\n\n\
-\tPlants\n\
-\tPlant A: ", aBuf,"\n\
-\tPlant B: ", bBuf,"\n\
-\tPlant C: ", cBuf,"\n\
-\tPlant D: ", dBuf,"\n\
-\tPlant E: ", eBuf,"\n\
-\tPlant F: ", fBuf,"\n\n\
-\tMisc\n\
-\tTurns Done: ", turnsBuf,"\n\
-\tActions Done: ", actionsBuf,"\n", NULL);
-	
+	\tLevels\n\
+	\tOxygen: ", oxygenBuf, "\n\
+	\tCarbon: ", carbonBuf, "\n\
+	\tPhosphorus: ", phosphorusBuf,"\n\
+	\tNitrogen: ", nitrogenBuf,"\n\
+	\tWater: ", waterBuf,"\n\n\
+	\tPlants\n\
+	\tPlant A: ", aBuf,"\n\
+	\tPlant B: ", bBuf,"\n\
+	\tPlant C: ", cBuf,"\n\
+	\tPlant D: ", dBuf,"\n\
+	\tPlant E: ", eBuf,"\n\
+	\tPlant F: ", fBuf,"\n\n\
+	\tMisc\n\
+	\tTurns Done: ", turnsBuf,"\n\
+	\tActions Done: ", actionsBuf,"\n", NULL);
+
 	gtk_text_buffer_insert(buffer3, &iter3, statsEntry, -1);
 
-	
+
 	/*Text View for Almanac Tab*/
 	GtkWidget *almanac = GTK_WIDGET(gtk_builder_get_object(builder,"textview3"));
 	GtkTextBuffer *buffer;
@@ -500,12 +498,12 @@ static void continueTime(void)
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(almanac));
 	gtk_text_buffer_get_iter_at_offset(buffer, &iter, 0);
 	const gchar *almanacEntry= "\tPlant 1: This is description for plant one\n\
-\tPlant 2: This is description for plant two\n\
-\tPlant 3: This is description for plant three\n\
-\tPlant 4: This is description for plant four\n\
-\tPlant 5: This is description for plant five\n\
-\tPlant 6: This is description for plant six\n\
-\tPlant 7: This is description for plant seven\n";
+	\tPlant 2: This is description for plant two\n\
+	\tPlant 3: This is description for plant three\n\
+	\tPlant 4: This is description for plant four\n\
+	\tPlant 5: This is description for plant five\n\
+	\tPlant 6: This is description for plant six\n\
+	\tPlant 7: This is description for plant seven\n";
 
 	gtk_text_buffer_insert(buffer, &iter, almanacEntry, -1);
 
@@ -517,13 +515,13 @@ static void continueTime(void)
 	gtk_text_buffer_get_iter_at_offset(buffer2, &iter2, 0);
 
 	tipEntry1 = "\tTip 1: Your oxygen levels are really low!\
- Consider planting more of plant 3 or plant 7 to raise your level.\n\n";
+	Consider planting more of plant 3 or plant 7 to raise your level.\n\n";
 
 	tipEntry2 = "\tTip 2: You're doing a great job with your nitrogen levels.\
- You probably won't need to worry about it for a while\n\n";
+	You probably won't need to worry about it for a while\n\n";
 
 	tipEntry3 = "\tTip 3: Your water levels are really high!\
- You might want to plant plant 2 to lower your level.\n";
+	You might want to plant plant 2 to lower your level.\n";
 
 	//Combine Tips together	
 	gchar *tipEntry = g_strconcat(tipEntry1,tipEntry2,tipEntry3,NULL);
@@ -531,31 +529,77 @@ static void continueTime(void)
 
 	/* Get the window object from the ui file */
 	window3 = GTK_WIDGET (gtk_builder_get_object (builder, "window3"));
-    if (!window3){
+	if (!window3){
 		g_critical ("Widget \"%s\" is missing in file %s.",
-				"window3",
-				UI_STATUS);
-    }
-	
+		            "window3",
+		            UI_STATUS);
+	}
+
 	g_object_unref (builder);
-	
+
 	g_free(statsEntry);
-	
+
 	gtk_widget_show_all (GTK_WIDGET (window3));
 	gtk_widget_hide (GTK_WIDGET (window2));
-	
+
 }//end of continueTime
 
 //Method for Help
 static void helpTime (void)
 {
-	exit(0);
+
+	GtkBuilder *builder;
+	GError* error = NULL;
+
+	/* Load UI from file */
+	builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, UI_TITLE, &error))
+	{
+		g_critical ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
+	}
+
+	/* Auto-connect signal handlers */
+	gtk_builder_connect_signals (builder, NULL);
+
+	GtkWidget *dialog;
+	dialog = gtk_message_dialog_new (GTK_WINDOW(gtk_builder_get_object(builder,"window1")),
+	                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+	                                 GTK_MESSAGE_ERROR,
+	                                 GTK_BUTTONS_CLOSE,    
+	                                 "Sorry. This is just a prototype...");
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
 }
 
 //Method for Options
 static void optionTime (void)
 {
-	exit(0);
+
+	GtkBuilder *builder;
+	GError* error = NULL;
+
+	/* Load UI from file */
+	builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, UI_TITLE, &error))
+	{
+		g_critical ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
+	}
+
+	/* Auto-connect signal handlers */
+	gtk_builder_connect_signals (builder, NULL);
+
+	GtkWidget *dialog;
+	dialog = gtk_message_dialog_new (GTK_WINDOW(gtk_builder_get_object(builder,"window1")),
+	                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+	                                 GTK_MESSAGE_ERROR,
+	                                 GTK_BUTTONS_CLOSE,    
+	                                 "Sorry. This is just a prototype...");
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
 }
 
 //Method for Start
@@ -563,7 +607,7 @@ static void startTime (void)
 {
 	GtkBuilder *builder;
 	GError* error = NULL;
-	
+
 	/* Load UI from file */
 	builder = gtk_builder_new ();
 	if (!gtk_builder_add_from_file (builder, UI_STORY, &error))
@@ -577,7 +621,7 @@ static void startTime (void)
 
 	/*Connect Buttons in UI File with variables*/
 	GtkWidget *btnContinue = GTK_WIDGET(gtk_builder_get_object (builder,"buttonContinue"));
-	
+
 	/*Connect Continue button with 'continueTime' function*/
 	g_signal_connect(btnContinue,"clicked",G_CALLBACK(continueTime), NULL);
 
@@ -589,34 +633,34 @@ static void startTime (void)
 	gtk_text_buffer_get_iter_at_offset(buffer, &iter, 0);
 	const gchar *storyLine= "\tDear Residence,\n\n \
 	You have just inherited a rundown farm from your uncle.\
- The soil is currently in such bad shape that nothing can currently grow.\
- In order to grow crops, you need to nurture the land back to health.\n\n\
+	The soil is currently in such bad shape that nothing can currently grow.\
+	In order to grow crops, you need to nurture the land back to health.\n\n\
 	Sincerely,\n\
 	Mr.Governor";
 
 	gtk_text_buffer_insert(buffer, &iter, storyLine, -1);
 
-	
-	
+
+
 	/* Get the window object from the ui file */
 	window2 = GTK_WIDGET (gtk_builder_get_object (builder, "window2"));
-        if (!window2)
-        {
-                g_critical ("Widget \"%s\" is missing in file %s.",
-				"window2",
-				UI_STORY);
-        }
+	if (!window2)
+	{
+		g_critical ("Widget \"%s\" is missing in file %s.",
+		            "window2",
+		            UI_STORY);
+	}
 	g_object_unref (builder);
 
 	gtk_widget_show_all (GTK_WIDGET (window2));
 	gtk_widget_hide (GTK_WIDGET (window));
-	
+
 }//end of startTime
 
 /* Creates the first window of the program, the Title Screen */
 static void
 sdp_new_window (GApplication *app,
-                           GFile        *file)
+                GFile        *file)
 {
 	GtkBuilder *builder;
 	GError* error = NULL;
@@ -637,7 +681,7 @@ sdp_new_window (GApplication *app,
 	GtkWidget *btnHelp= GTK_WIDGET(gtk_builder_get_object (builder,"buttonHelp"));
 	GtkWidget *btnOptions= GTK_WIDGET(gtk_builder_get_object (builder,"buttonOptions"));
 	GtkWidget *btnStart= GTK_WIDGET(gtk_builder_get_object (builder,"buttonStart"));
-	
+
 	/*Connect Exit button with 'exitTime' function*/
 	g_signal_connect(btnExit,"clicked",G_CALLBACK(exitTime), NULL);
 
@@ -650,17 +694,17 @@ sdp_new_window (GApplication *app,
 	/*Connect Start button with 'startTime' function*/
 	g_signal_connect(btnStart,"clicked",G_CALLBACK(startTime), NULL);
 
-	
+
 	/* Get the window object from the ui file */
 	window = GTK_WIDGET (gtk_builder_get_object (builder, "window"));
-        if (!window)
-        {
-                g_critical ("Widget \"%s\" is missing in file %s.",
-				"window",
-				UI_TITLE);
-        }
+	if (!window)
+	{
+		g_critical ("Widget \"%s\" is missing in file %s.",
+		            "window",
+		            UI_TITLE);
+	}
 	g_object_unref (builder);
-	
+
 	gtk_window_set_application (GTK_WINDOW (window), GTK_APPLICATION (app));
 	if (file != NULL)
 	{
@@ -674,19 +718,19 @@ sdp_new_window (GApplication *app,
 static void
 sdp_activate (GApplication *application)
 {
-  sdp_new_window (application, NULL);
+	sdp_new_window (application, NULL);
 }
 
 static void
 sdp_open (GApplication  *application,
-                     GFile        **files,
-                     gint           n_files,
-                     const gchar   *hint)
+          GFile        **files,
+          gint           n_files,
+          const gchar   *hint)
 {
-  gint i;
+	gint i;
 
-  for (i = 0; i < n_files; i++)
-    sdp_new_window (application, files[i]);
+	for (i = 0; i < n_files; i++)
+		sdp_new_window (application, files[i]);
 }
 
 static void

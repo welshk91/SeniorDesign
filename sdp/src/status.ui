@@ -3,7 +3,7 @@
   <!-- interface-requires gtk+ 2.12 -->
   <object class="GtkWindow" id="window3">
     <property name="can_focus">False</property>
-    <property name="default_width">700</property>
+    <property name="default_width">750</property>
     <property name="default_height">550</property>
     <child>
       <object class="GtkPaned" id="paned1">
