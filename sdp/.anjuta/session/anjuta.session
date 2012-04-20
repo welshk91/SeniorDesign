@@ -7,7 +7,7 @@ Geometry=1678x990+0+30
 Shortcut=sdp//sdp//src//sdp
 
 [File Loader]
-Files=file:///home/kev/sdp/src/sdp.c#4%%%file:///home/kev/sdp/src/main.c#46%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui
+Files=file:///home/kev/sdp/src/sdp.c#1%%%file:///home/kev/sdp/src/main.c#35%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n

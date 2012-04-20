@@ -267,7 +267,7 @@ static void acceptTime (void)
 		                                      GTK_RESPONSE_OK,
 		                                      NULL);
 		contentArea = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-		label = gtk_label_new ("Are you sure you wish to continue?\n");
+		label = gtk_label_new ("\nAre you sure you wish to continue?\n");
 
 		/* Add the label, and show everything we've added to the dialog. */
 		gtk_container_add (GTK_CONTAINER (contentArea), label);
@@ -351,8 +351,7 @@ static void acceptTime (void)
 
 				//Cancel Button was Pressed
 			case GTK_RESPONSE_CANCEL:
-				printf("boo \n");
-				exitTime();
+				printf("Action canceled \n");
 				break;
 
 				//Unexpected Response
@@ -385,22 +384,22 @@ static void acceptTime (void)
 
 		//The text displayed in Stats
 		statsEntry = g_strconcat("\t\tStats\n\n\
-		\tLevels\n\
-		\tOxygen: ", oxygenBuf, "\n\
-		\tCarbon: ", carbonBuf, "\n\
-		\tPhosphorus: ", phosphorusBuf,"\n\
-		\tNitrogen: ", nitrogenBuf,"\n\
-		\tWater: ", waterBuf,"\n\n\
-		\tPlants\n\
-		\tPlant A: ", aBuf,"\n\
-		\tPlant B: ", bBuf,"\n\
-		\tPlant C: ", cBuf,"\n\
-		\tPlant D: ", dBuf,"\n\
-		\tPlant E: ", eBuf,"\n\
-		\tPlant F: ", fBuf,"\n\n\
-		\tMisc\n\
-		\tTurns Done: ", turnsBuf,"\n\
-		\tActions Done: ", actionsBuf,"\n", NULL);
+	\tLevels\n\
+	\tOxygen: ", oxygenBuf, "\n\
+	\tCarbon: ", carbonBuf, "\n\
+	\tPhosphorus: ", phosphorusBuf,"\n\
+	\tNitrogen: ", nitrogenBuf,"\n\
+	\tWater: ", waterBuf,"\n\n\
+	\tPlants\n\
+	\tPlant A: ", aBuf,"\n\
+	\tPlant B: ", bBuf,"\n\
+	\tPlant C: ", cBuf,"\n\
+	\tPlant D: ", dBuf,"\n\
+	\tPlant E: ", eBuf,"\n\
+	\tPlant F: ", fBuf,"\n\n\
+	\tMisc\n\
+	\tTurns Done: ", turnsBuf,"\n\
+	\tActions Done: ", actionsBuf,"\n", NULL);
 
 		gtk_text_buffer_set_text (buffer3,statsEntry,-1);
 

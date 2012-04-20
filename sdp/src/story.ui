@@ -62,7 +62,14 @@
                   <object class="GtkSpinButton" id="spinbutton1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="has_tooltip">True</property>
+                    <property name="tooltip_text" translatable="yes">Enter the number of turns</property>
+                    <property name="max_length">3</property>
                     <property name="invisible_char">•</property>
+                    <property name="xalign">1</property>
+                    <property name="truncate_multiline">True</property>
+                    <property name="placeholder_text">Default Value</property>
+                    <property name="climb_rate">1</property>
                     <property name="snap_to_ticks">True</property>
                     <property name="numeric">True</property>
                   </object>
@@ -79,6 +86,8 @@
                     <property name="can_focus">True</property>
                     <property name="has_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="has_tooltip">True</property>
+                    <property name="tooltip_text" translatable="yes">Start the Game!</property>
                     <property name="use_action_appearance">False</property>
                   </object>
                   <packing>

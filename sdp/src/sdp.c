@@ -351,8 +351,7 @@ static void acceptTime (void)
 
 				//Cancel Button was Pressed
 			case GTK_RESPONSE_CANCEL:
-				printf("boo \n");
-				exitTime();
+				printf("Action canceled \n");
 				break;
 
 				//Unexpected Response
