@@ -23,9 +23,9 @@
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/sdp/ui/title.ui" */
-#define UI_TITLE "src/title.ui"
-#define UI_STORY "src/story.ui"
-#define UI_STATUS "src/status.ui"
+#define UI_TITLE "src/title.ui"		//SRC/ HERE
+#define UI_STORY "src/story.ui"		//SRC/ HERE
+#define UI_STATUS "src/status.ui"	//SRC/ HERE
 
 //Top level windows used in each screen
 GtkWidget *window;
@@ -440,7 +440,7 @@ static void continueTime(void)
 
 	/*Image for Soil View*/
 	GtkWidget *soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
-	gtk_image_set_from_file (GTK_IMAGE (soilImage), "src/crappy_soil.jpg");
+	gtk_image_set_from_file (GTK_IMAGE (soilImage), "src/crappy_soil.jpg"); //SRC/ HERE
 
 	/*Turns label*/
 	//turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));

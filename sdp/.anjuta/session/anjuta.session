@@ -1,13 +1,13 @@
 
 [Anjuta]
 Maximized=1
-Geometry=1678x990+0+30
+Geometry=1678x988+0+31
 
 [Project Manager]
-Shortcut=sdp//sdp//src//sdp
+Shortcut=sdp
 
 [File Loader]
-Files=file:///home/kev/sdp/src/sdp.c#1%%%file:///home/kev/sdp/src/main.c#35%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui
+Files=file:///home/kev/sdp/src/sdp.c#443%%%file:///home/kev/sdp/src/main.c#35%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
