@@ -26,6 +26,9 @@ sdp_SOURCES = \
 	main.c \
 	sdp.h \
 	sdp.c \
+	ok_soil.jpg \
+	nice_soil.jpg \
+	bad_soil.jpg \
 	crappy_soil.jpg	
 
 sdp_LDFLAGS = \

@@ -69,27 +69,27 @@ int numberTurns = 0;
 int numberActions = 0;
 int turnCountdown = 50;
 
-//Buffers that can carry 24 digit numbers, probably overkill but solves buffer overflow problems
-char oxygenBuf[24];
-char carbonBuf[24];
-char phosphorusBuf[24];
-char nitrogenBuf[24];
-char waterBuf[24];
-char cloverBuf[24];
-char thornBuf[24];
-char ryeBuf[24];
-char sumacBuf[24];
-char bearberryBuf[24];
-char salviaBuf[24];
-char alderBuf[24];
-char dogwoodBuf[24];
-char willowBuf[24];
-char tillBuf[24];
-char waterBuf[24];
-char plowBuf[24];
-char turnsBuf[24];
-char actionsBuf[24];
-char countdownBuf[24];
+//Buffers that can carry 8 digit numbers, probably overkill but solves buffer overflow problems
+char oxygenBuf[8];
+char carbonBuf[8];
+char phosphorusBuf[8];
+char nitrogenBuf[8];
+char waterBuf[8];
+char cloverBuf[8];
+char thornBuf[8];
+char ryeBuf[8];
+char sumacBuf[8];
+char bearberryBuf[8];
+char salviaBuf[8];
+char alderBuf[8];
+char dogwoodBuf[8];
+char willowBuf[8];
+char tillBuf[8];
+char waterBuf[8];
+char plowBuf[8];
+char turnsBuf[8];
+char actionsBuf[8];
+char countdownBuf[8];
 
 //Entries for the Text Views
 gchar *statsEntry;
@@ -473,9 +473,8 @@ static void acceptTime (void)
 		printf("\nFilename = %s\n", g_value_get_string(&value));
 
 		gtk_widget_show_all (GTK_WIDGET (window3));
-		gtk_widget_hide (GTK_WIDGET (window2));
-		
-		printf("COUNTDOWN: %d \n",turnCountdown);
+	
+		printf("Turns Left: %d \n",turnCountdown);
 	}
 
 }//end of AcceptTime
