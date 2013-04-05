@@ -445,8 +445,8 @@ static void acceptTime (void)
 		//gtk_label_set_label(GTK_LABEL(turnsLeft), countdownBuf);
 
 		/*Image for Soil View*/
-		if(turnCountdown<48){
-			printf("here cd: %d \n",turnCountdown);
+		if(oxygenLvl>70){
+			//printf("here cd: %d \n",turnCountdown);
 			imagePath = IMAGE_NICE;
 			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 			soilImage = gtk_image_new_from_file (imagePath);
@@ -455,9 +455,13 @@ static void acceptTime (void)
 			gtk_widget_show_all(GTK_WIDGET(soilImage));
 
 		}
-		else if(turnCountdown<49){
-			printf("HERE COUNTDOWN: %d \n",turnCountdown);
+		else if(oxygenLvl>50){
 			imagePath = IMAGE_OK;
+			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
+			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
+		}
+		else if(oxygenLvl>30){
+			imagePath = IMAGE_BAD;
 			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
 		}
