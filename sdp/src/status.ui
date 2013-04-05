@@ -3,7 +3,7 @@
   <!-- interface-requires gtk+ 2.12 -->
   <object class="GtkWindow" id="window3">
     <property name="can_focus">False</property>
-    <property name="default_width">750</property>
+    <property name="default_width">775</property>
     <property name="default_height">550</property>
     <child>
       <object class="GtkPaned" id="paned1">
@@ -90,7 +90,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonH">
-                        <property name="label" translatable="yes">Bushes</property>
+                        <property name="label" translatable="yes">Dogwood</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -106,7 +106,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonG">
-                        <property name="label" translatable="yes">Trees</property>
+                        <property name="label" translatable="yes">Alder</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -122,7 +122,8 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonA">
-                        <property name="label" translatable="yes">Plant A</property>
+                        <property name="label" translatable="yes">Crimson
+Clover</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -138,7 +139,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonB">
-                        <property name="label" translatable="yes">Plant B</property>
+                        <property name="label" translatable="yes">Boxthorn</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -154,7 +155,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonC">
-                        <property name="label" translatable="yes">Plant C</property>
+                        <property name="label" translatable="yes">Rye</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -170,7 +171,8 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonD">
-                        <property name="label" translatable="yes">Plant D</property>
+                        <property name="label" translatable="yes">Smooth
+Sumac</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -186,7 +188,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonE">
-                        <property name="label" translatable="yes">Plant E</property>
+                        <property name="label" translatable="yes">Bearberry</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -202,7 +204,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonF">
-                        <property name="label" translatable="yes">Plant F</property>
+                        <property name="label" translatable="yes">Salvia</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -218,7 +220,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonI">
-                        <property name="label" translatable="yes">???</property>
+                        <property name="label" translatable="yes">Willow</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -234,7 +236,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonJ">
-                        <property name="label" translatable="yes">Toil</property>
+                        <property name="label" translatable="yes">Till</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -266,7 +268,7 @@
                     </child>
                     <child>
                       <object class="GtkToggleButton" id="togglebuttonL">
-                        <property name="label" translatable="yes">?????</property>
+                        <property name="label" translatable="yes">Plow</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>

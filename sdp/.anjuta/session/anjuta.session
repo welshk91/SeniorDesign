@@ -3,14 +3,15 @@
 Maximized=1
 Geometry=1678x988+0+31
 
-[Project Manager]
-Shortcut=sdp
-
 [File Loader]
-Files=file:///home/kev/sdp/src/sdp.c#443%%%file:///home/kev/sdp/src/main.c#35%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui
+Files=file:///home/kev/sdp/src/sdp.c#128%%%file:///home/kev/sdp/src/main.c#12%%%file:///home/kev/Programs/SeniorDesign/sdp/src/sdp.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
+
+[Project Manager]
+Shortcut=sdp//sdp//src//sdp
+Expand=sdp%%%sdp//sdp%%%sdp//sdp//src%%%sdp//sdp//src//sdp%%%sdp//sdp//src//ui
 
 [Execution]
 Program uri=file:///home/kev/sdp/Debug/src/sdp

@@ -23,9 +23,9 @@
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/sdp/ui/title.ui" */
-#define UI_TITLE "src/title.ui"		//SRC/ HERE
-#define UI_STORY "src/story.ui"		//SRC/ HERE
-#define UI_STATUS "src/status.ui"	//SRC/ HERE
+#define UI_TITLE "src/title.ui"
+#define UI_STORY "src/story.ui"
+#define UI_STATUS "src/status.ui"
 
 //Top level windows used in each screen
 GtkWidget *window;
@@ -37,6 +37,7 @@ GtkTextBuffer *buffer3;
 GtkWidget *stats;
 GtkWidget *turnsLeft;
 GtkTextIter iter3;
+GtkWidget *soilImage;
 
 //Levels
 int oxygenLvl = 5;
@@ -46,12 +47,18 @@ int nitrogenLvl = 40;
 int waterLvl = 80;
 
 //Statistics
-int plantA = 0;
-int plantB = 0;
-int plantC = 0;
-int plantD = 0;
-int plantE = 0;
-int plantF = 0;
+int clover = 0;
+int thorn = 0;
+int rye = 0;
+int sumac = 0;
+int bearberry = 0;
+int salvia = 0;
+int alder = 0;
+int dogwood = 0;
+int willow = 0;
+int till = 0;
+int water = 0;
+int plow = 0;
 int numberTurns = 0;
 int numberActions = 0;
 int turnCountdown = 50;
@@ -62,12 +69,18 @@ char carbonBuf[4];
 char phosphorusBuf[4];
 char nitrogenBuf[4];
 char waterBuf[4];
-char aBuf[4];
-char bBuf[4];
-char cBuf[4];
-char dBuf[4];
-char eBuf[4];
-char fBuf[4];
+char cloverBuf[4];
+char thornBuf[4];
+char ryeBuf[4];
+char sumacBuf[4];
+char bearberryBuf[4];
+char salviaBuf[4];
+char alderBuf[4];
+char dogwoodBuf[4];
+char willowBuf[4];
+char tillBuf[4];
+char waterBuf[4];
+char plowBuf[4];
 char turnsBuf[4];
 char actionsBuf[4];
 char countdownBuf[4];
@@ -78,25 +91,27 @@ gchar *tipEntry1;
 gchar *tipEntry2;
 gchar *tipEntry3;
 
+//Image path
+gchar *imagePath = "src/crappy_soil.jpg";
+
 //Number of "job" selections the player has made 
 int numChoices = 0;
 
 //If a certain plant is picked
-int pickedA = 0;
-int pickedB = 0;
-int pickedC = 0;
-int pickedD = 0;
-int pickedE = 0;
-int pickedF = 0;
-int pickedG = 0;
-int pickedH = 0;
-int pickedI = 0;
-int pickedJ = 0;
-int pickedK = 0;
-int pickedL = 0;
+int pickedClover = 0;
+int pickedThorn = 0;
+int pickedRye = 0;
+int pickedSumac = 0;
+int pickedBearberry = 0;
+int pickedSalvia = 0;
+int pickedAlder = 0;
+int pickedDogwood = 0;
+int pickedWillow = 0;
+int pickedTill = 0;
+int pickedWater = 0;
+int pickedPlow = 0;
 
 G_DEFINE_TYPE (Sdp, sdp, GTK_TYPE_APPLICATION);
-
 
 //Method for Exiting
 static void exitTime (void)
@@ -113,41 +128,41 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 		//printf("GTKWidget %s is down \n", gtk_button_get_label (GTK_BUTTON(widget)));
 
 		/*Change variable 'picked' to true*/
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant A")==0){
-			pickedA = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Crimson\nClover")==0){
+			pickedClover = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant B")==0){
-			pickedB = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Boxthorn")==0){
+			pickedThorn = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant C")==0){
-			pickedC = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Rye")==0){
+			pickedRye = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant D")==0){
-			pickedD = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Smooth\nSumac")==0){
+			pickedSumac = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant E")==0){
-			pickedE = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Bearberry")==0){
+			pickedBearberry = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant F")==0){
-			pickedF = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Salvia")==0){
+			pickedSalvia = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Trees")==0){
-			pickedG = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Alder")==0){
+			pickedAlder = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Bushes")==0){
-			pickedH = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Dogwood")==0){
+			pickedDogwood = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"???")==0){
-			pickedI = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Willow")==0){
+			pickedWillow = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Toil")==0){
-			pickedJ = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Till")==0){
+			pickedTill = 1;
 		}
 		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Water")==0){
-			pickedK = 1;
+			pickedWater = 1;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"?????")==0){
-			pickedL = 1;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plow")==0){
+			pickedPlow = 1;
 		}
 
 		numChoices++;
@@ -158,41 +173,41 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 		//printf("GTKWidget %s is up \n", gtk_button_get_label (GTK_BUTTON(widget)));
 
 		/*Change variable 'picked' to false*/
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant A")==0){
-			pickedA = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Crimson\nClover")==0){
+			pickedClover = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant B")==0){
-			pickedB = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Boxthorn")==0){
+			pickedThorn = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant C")==0){
-			pickedC = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Rye")==0){
+			pickedRye = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant D")==0){
-			pickedD = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Smooth\nSumac")==0){
+			pickedSumac = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant E")==0){
-			pickedE = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Bearberry")==0){
+			pickedBearberry = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plant F")==0){
-			pickedF = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Salvia")==0){
+			pickedSalvia = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Trees")==0){
-			pickedG = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Alder")==0){
+			pickedAlder = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Bushes")==0){
-			pickedH = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Dogwood")==0){
+			pickedDogwood = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"???")==0){
-			pickedI = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Willow")==0){
+			pickedWillow = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Toil")==0){
-			pickedJ = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Till")==0){
+			pickedTill = 0;
 		}
 		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Water")==0){
-			pickedK = 0;
+			pickedWater = 0;
 		}
-		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"?????")==0){
-			pickedL = 0;
+		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plow")==0){
+			pickedPlow = 0;
 		}
 
 		numChoices--;
@@ -280,68 +295,68 @@ static void acceptTime (void)
 
 			//Accept Button was Pressed
 			case GTK_RESPONSE_OK:
-				printf("You chose %d actions \n", numChoices);
+				//printf("You chose %d actions \n", numChoices);
 
 				//Display choices the user made
-				if(pickedA){
-					printf("You chose Plant A \n");
+				if(pickedClover){
+					printf("You chose Crimson Clover \n");
 					oxygenLvl = oxygenLvl + 5;
-					plantA++;
+					clover++;
 				}
-				if(pickedB){
-					printf("You chose Plant B \n");
+				if(pickedThorn){
+					printf("You chose Boxthorn \n");
 					phosphorusLvl = phosphorusLvl + 10;
-					plantB++;
+					thorn++;
 				}
-				if(pickedC){
-					printf("You chose Plant C \n");
+				if(pickedRye){
+					printf("You chose Rye \n");
 					carbonLvl = carbonLvl + 5;
-					plantC++;
+					rye++;
 				}
-				if(pickedD){
-					printf("You chose Plant D \n");
+				if(pickedSumac){
+					printf("You chose Smooth Sumac \n");
 					nitrogenLvl = nitrogenLvl + 15;
-					plantD++;
+					sumac++;
 				}
-				if(pickedE){
-					printf("You chose Plant E \n");
-					waterLvl = waterLvl + 5;
-					plantE++;
-				}
-				if(pickedF){
-					printf("You chose Plant F \n");
-					oxygenLvl = oxygenLvl + 10;
-					plantF++;
-				}
-				if(pickedG){
-					printf("You chose Trees \n");
-					waterLvl = waterLvl + 5;
-					//plantG++;
-				}
-				if(pickedH){
-					printf("You chose Bushes \n");
-					phosphorusLvl = phosphorusLvl - 5;
-					//plantH++;
-				}
-				if(pickedI){
-					printf("You chose ??? \n");
-					carbonLvl = carbonLvl - 10;
-					//plantI++;
-				}
-				if(pickedJ){
-					printf("You chose Toil \n");
-					waterLvl = waterLvl - 5;
-					//plantJ++;
-				}
-				if(pickedK){
-					printf("You chose Water \n");
+				if(pickedBearberry){
+					printf("You chose Bearberry \n");
 					nitrogenLvl = nitrogenLvl - 10;
-					//plantK++;
+					bearberry++;
 				}
-				if(pickedL){
-					printf("You chose ?????  \n");
+				if(pickedSalvia){
+					printf("You chose Salvia \n");
 					oxygenLvl = oxygenLvl - 5;
-					//plantL++;
+					salvia++;
+				}
+				if(pickedAlder){
+					printf("You chose Alder \n");
+					waterLvl = waterLvl + 5;
+					alder++;
+				}
+				if(pickedDogwood){
+					printf("You chose Dogwood \n");
+					phosphorusLvl = phosphorusLvl - 5;
+					dogwood++;
+				}
+				if(pickedWillow){
+					printf("You chose Willow \n");
+					water = water - 10;
+					willow++;
+				}
+				if(pickedTill){
+					printf("You chose Till \n");
+					carbonLvl = carbonLvl - 10;
+					till++;
+				}
+				if(pickedWater){
+					printf("You chose Water \n");
+					water = water + 10;
+					water++;
+				}
+				if(pickedPlow){
+					printf("You chose Plow  \n");
+					oxygenLvl = oxygenLvl + 10;
+					plow++;
 				}
 
 				turnCountdown = turnCountdown - 1;
@@ -373,31 +388,45 @@ static void acceptTime (void)
 		sprintf(phosphorusBuf, "%d", phosphorusLvl);
 		sprintf(nitrogenBuf, "%d", nitrogenLvl);
 		sprintf(waterBuf, "%d", waterLvl);
-		sprintf(aBuf, "%d", plantA);
-		sprintf(bBuf, "%d", plantB);
-		sprintf(cBuf, "%d", plantC);
-		sprintf(dBuf, "%d", plantD);
-		sprintf(eBuf, "%d", plantE);
-		sprintf(fBuf, "%d", plantF);
+		sprintf(cloverBuf, "%d", clover);
+		sprintf(thornBuf, "%d", thorn);
+		sprintf(ryeBuf, "%d", rye);
+		sprintf(sumacBuf, "%d", sumac);
+		sprintf(bearberryBuf, "%d", bearberry);
+		sprintf(salviaBuf, "%d", salvia);
+		sprintf(alderBuf, "%d", alder);
+		sprintf(dogwoodBuf, "%d", dogwood);
+		sprintf(willowBuf, "%d", willow);
+		sprintf(tillBuf, "%d", till);
+		sprintf(waterBuf, "%d", water);
+		sprintf(plowBuf, "%d", plow);
 		sprintf(turnsBuf, "%d", numberTurns);
 		sprintf(actionsBuf, "%d", numberActions);
 
 		//The text displayed in Stats
 		statsEntry = g_strconcat("\t\tStats\n\n\
-	\tLevels\n\
+	Levels\n\
 	\tOxygen: ", oxygenBuf, "\n\
 	\tCarbon: ", carbonBuf, "\n\
 	\tPhosphorus: ", phosphorusBuf,"\n\
 	\tNitrogen: ", nitrogenBuf,"\n\
 	\tWater: ", waterBuf,"\n\n\
-	\tPlants\n\
-	\tPlant A: ", aBuf,"\n\
-	\tPlant B: ", bBuf,"\n\
-	\tPlant C: ", cBuf,"\n\
-	\tPlant D: ", dBuf,"\n\
-	\tPlant E: ", eBuf,"\n\
-	\tPlant F: ", fBuf,"\n\n\
-	\tMisc\n\
+	Plants\n\
+	\tCrimson Clover: ", cloverBuf,"\n\
+	\tBoxthorn: ", thornBuf,"\n\
+	\tRye: ", ryeBuf,"\n\
+	\tSmooth Sumac: ", sumacBuf,"\n\
+	\tBearberry: ", bearberryBuf,"\n\
+	\tSalvia: ", salviaBuf,"\n\n\
+	Foliage\n\
+	\tAlder: ", alderBuf,"\n\
+	\tDogwood: ", dogwoodBuf,"\n\
+	\tWillow: ", willowBuf,"\n\n\
+	Farming\n\
+	\tTill: ", tillBuf,"\n\
+	\tWater: ", waterBuf,"\n\
+	\tPlow: ", plowBuf,"\n\n\
+	Misc\n\
 	\tTurns Done: ", turnsBuf,"\n\
 	\tActions Done: ", actionsBuf,"\n", NULL);
 
@@ -407,9 +436,37 @@ static void acceptTime (void)
 		turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));
 		sprintf(countdownBuf, "%d turn countdown", turnCountdown);
 		gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
+		//gtk_label_set_label(GTK_LABEL(turnsLeft), countdownBuf);
 
+		/*Image for Soil View*/
+		if(turnCountdown<48){
+			printf("here cd: %d \n",turnCountdown);
+			imagePath = "src/nice_soil.jpg";
+			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
+			soilImage = gtk_image_new_from_file (imagePath);
+			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
+			
+			gtk_widget_show_all(GTK_WIDGET(soilImage));
+
+		}
+		else if(turnCountdown<49){
+			printf("HERE COUNTDOWN: %d \n",turnCountdown);
+			imagePath = "src/ok_soil.jpg";
+			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
+			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
+
+		}
+
+		GValue value = {0,};
+		g_value_init (&value, G_TYPE_STRING);
+
+		g_object_get_property(G_OBJECT(soilImage), "file", &value);
+		printf("\nFilename = %s\n", g_value_get_string(&value));
+
+		gtk_widget_show_all (GTK_WIDGET (window3));
+		gtk_widget_hide (GTK_WIDGET (window2));
+		
 		printf("COUNTDOWN: %d \n",turnCountdown);
-
 	}
 
 }//end of AcceptTime
@@ -439,14 +496,13 @@ static void continueTime(void)
 	g_signal_connect(btnAccept,"clicked",G_CALLBACK(acceptTime), NULL);
 
 	/*Image for Soil View*/
-	GtkWidget *soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
-	gtk_image_set_from_file (GTK_IMAGE (soilImage), "src/crappy_soil.jpg"); //SRC/ HERE
-
+	soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
+	gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
+			
 	/*Turns label*/
 	//turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));
 	//sprintf(countdownBuf, "%d Turns Left", turnCountdown);
 	//gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
-
 
 	/*Text View for Almanac Tab*/
 	stats = GTK_WIDGET(gtk_builder_get_object(builder,"textview1"));
@@ -459,36 +515,49 @@ static void continueTime(void)
 	sprintf(phosphorusBuf, "%d", phosphorusLvl);
 	sprintf(nitrogenBuf, "%d", nitrogenLvl);
 	sprintf(waterBuf, "%d", waterLvl);
-	sprintf(aBuf, "%d", plantA);
-	sprintf(bBuf, "%d", plantB);
-	sprintf(cBuf, "%d", plantC);
-	sprintf(dBuf, "%d", plantD);
-	sprintf(eBuf, "%d", plantE);
-	sprintf(fBuf, "%d", plantF);
+	sprintf(cloverBuf, "%d", clover);
+	sprintf(thornBuf, "%d", thorn);
+	sprintf(ryeBuf, "%d", rye);
+	sprintf(sumacBuf, "%d", sumac);
+	sprintf(bearberryBuf, "%d", bearberry);
+	sprintf(salviaBuf, "%d", salvia);
+	sprintf(alderBuf, "%d", alder);
+	sprintf(dogwoodBuf, "%d", dogwood);
+	sprintf(willowBuf, "%d", willow);
+	sprintf(tillBuf, "%d", till);
+	sprintf(waterBuf, "%d", water);
+	sprintf(plowBuf, "%d", plow);
 	sprintf(turnsBuf, "%d", numberTurns);
 	sprintf(actionsBuf, "%d", numberActions);
 
 	//The text displayed in Stats
 	statsEntry = g_strconcat("\t\tStats\n\n\
-	\tLevels\n\
+	Levels\n\
 	\tOxygen: ", oxygenBuf, "\n\
 	\tCarbon: ", carbonBuf, "\n\
 	\tPhosphorus: ", phosphorusBuf,"\n\
 	\tNitrogen: ", nitrogenBuf,"\n\
 	\tWater: ", waterBuf,"\n\n\
-	\tPlants\n\
-	\tPlant A: ", aBuf,"\n\
-	\tPlant B: ", bBuf,"\n\
-	\tPlant C: ", cBuf,"\n\
-	\tPlant D: ", dBuf,"\n\
-	\tPlant E: ", eBuf,"\n\
-	\tPlant F: ", fBuf,"\n\n\
-	\tMisc\n\
+	Plants\n\
+	\tCrimson Clover: ", cloverBuf,"\n\
+	\tBoxthorn: ", thornBuf,"\n\
+	\tRye: ", ryeBuf,"\n\
+	\tSmooth Sumac: ", sumacBuf,"\n\
+	\tBearberry: ", bearberryBuf,"\n\
+	\tSalvia: ", salviaBuf,"\n\n\
+	Foliage\n\
+	\tAlder: ", alderBuf,"\n\
+	\tDogwood: ", dogwoodBuf,"\n\
+	\tWillow: ", willowBuf,"\n\n\
+	Farming\n\
+	\tTill: ", tillBuf,"\n\
+	\tWater: ", waterBuf,"\n\
+	\tPlow: ", plowBuf,"\n\n\
+	Misc\n\
 	\tTurns Done: ", turnsBuf,"\n\
 	\tActions Done: ", actionsBuf,"\n", NULL);
 
 	gtk_text_buffer_insert(buffer3, &iter3, statsEntry, -1);
-
 
 	/*Text View for Almanac Tab*/
 	GtkWidget *almanac = GTK_WIDGET(gtk_builder_get_object(builder,"textview3"));
@@ -496,13 +565,15 @@ static void continueTime(void)
 	GtkTextIter iter;
 	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(almanac));
 	gtk_text_buffer_get_iter_at_offset(buffer, &iter, 0);
-	const gchar *almanacEntry= "\tPlant 1: This is description for plant one\n\
-	\tPlant 2: This is description for plant two\n\
-	\tPlant 3: This is description for plant three\n\
-	\tPlant 4: This is description for plant four\n\
-	\tPlant 5: This is description for plant five\n\
-	\tPlant 6: This is description for plant six\n\
-	\tPlant 7: This is description for plant seven\n";
+	const gchar *almanacEntry= "\tCrimson Clover: Crimson clover is widely grown as a protein-rich forage crop for cattle and other livestock. It can typically be found in forest margins, fields and roadsides\n\
+	\tBoxthorn: In his Naturalis historia, Pliny the Elder describes boxthorn as a medicinal plant recommended as a treatment for sore eyes and inflammation\n\
+	\tRye: Rye is a grass grown extensively as a grain and as a forage crop. It is a member of the wheat tribe (Triticeae) and is closely related to barley (Hordeum) and wheat (Triticum)\n\
+	\tSmooth Sumac: Smooth Sumac has a spreading, open-growing shrub growing up to 3 metres (9.8 ft) tall, rarely to 5 metres (16 ft)\n\
+	\tBearberry: The leaves are picked any time during the summer and dried for use in infusions, liquid extracts, medicinal tea bags and tablets believed to be potentially effective in folk medicine.\n\
+	\tSalvia: Salvia divinorum (also known by its genus name Salvia) is a psychoactive plant which can induce dissociative effects and is a potent producer of visions and other hallucinatory experiences\n\
+	\tAlder: Alder is particularly noted for its important symbiotic relationship with Frankia alni, an actinomycete, filamentous, nitrogen-fixing bacterium\n\
+	\tDogwood: Dogwoods are widely planted horticulturally, and the dense wood of the larger-stemmed species is valued for certain specialized purposes\n\
+	\tWillow: Willows are often planted on the borders of streams so their interlacing roots may protect the bank against the action of the water\n";
 
 	gtk_text_buffer_insert(buffer, &iter, almanacEntry, -1);
 
@@ -514,13 +585,13 @@ static void continueTime(void)
 	gtk_text_buffer_get_iter_at_offset(buffer2, &iter2, 0);
 
 	tipEntry1 = "\tTip 1: Your oxygen levels are really low!\
-	Consider planting more of plant 3 or plant 7 to raise your level.\n\n";
+	Consider planting more of Salvia or Crimson Clover to raise your level.\n\n";
 
 	tipEntry2 = "\tTip 2: You're doing a great job with your nitrogen levels.\
 	You probably won't need to worry about it for a while\n\n";
 
 	tipEntry3 = "\tTip 3: Your water levels are really high!\
-	You might want to plant plant 2 to lower your level.\n";
+	You might want to plant Willow to lower your level.\n";
 
 	//Combine Tips together	
 	gchar *tipEntry = g_strconcat(tipEntry1,tipEntry2,tipEntry3,NULL);
@@ -546,7 +617,6 @@ static void continueTime(void)
 //Method for Help
 static void helpTime (void)
 {
-
 	GtkBuilder *builder;
 	GError* error = NULL;
 
