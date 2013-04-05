@@ -69,27 +69,27 @@ int numberTurns = 0;
 int numberActions = 0;
 int turnCountdown = 50;
 
-//Buffers that can carry 4 digit numbers
-char oxygenBuf[4];
-char carbonBuf[4];
-char phosphorusBuf[4];
-char nitrogenBuf[4];
-char waterBuf[4];
-char cloverBuf[4];
-char thornBuf[4];
-char ryeBuf[4];
-char sumacBuf[4];
-char bearberryBuf[4];
-char salviaBuf[4];
-char alderBuf[4];
-char dogwoodBuf[4];
-char willowBuf[4];
-char tillBuf[4];
-char waterBuf[4];
-char plowBuf[4];
-char turnsBuf[4];
-char actionsBuf[4];
-char countdownBuf[4];
+//Buffers that can carry 24 digit numbers, probably overkill but solves buffer overflow problems
+char oxygenBuf[24];
+char carbonBuf[24];
+char phosphorusBuf[24];
+char nitrogenBuf[24];
+char waterBuf[24];
+char cloverBuf[24];
+char thornBuf[24];
+char ryeBuf[24];
+char sumacBuf[24];
+char bearberryBuf[24];
+char salviaBuf[24];
+char alderBuf[24];
+char dogwoodBuf[24];
+char willowBuf[24];
+char tillBuf[24];
+char waterBuf[24];
+char plowBuf[24];
+char turnsBuf[24];
+char actionsBuf[24];
+char countdownBuf[24];
 
 //Entries for the Text Views
 gchar *statsEntry;

@@ -456,13 +456,11 @@ static void acceptTime (void)
 
 		}
 		else if(oxygenLvl>50){
-			//printf("HERE COUNTDOWN: %d \n",turnCountdown);
 			imagePath = IMAGE_OK;
 			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
 		}
 		else if(oxygenLvl>30){
-			//printf("HERE COUNTDOWN: %d \n",turnCountdown);
 			imagePath = IMAGE_BAD;
 			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
