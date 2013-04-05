@@ -22,10 +22,10 @@
 #include <glib/gi18n.h>
 
 /* For testing propose use the local (not installed) ui file */
-/* #define UI_FILE PACKAGE_DATA_DIR"/sdp/ui/title.ui" */
-#define UI_TITLE "/sdp/ui/title.ui"
-#define UI_STORY "/sdp/ui/story.ui"
-#define UI_STATUS "/sdp/ui/status.ui" // "src/status.ui"
+/* #define UI_FILE PACKAGE_DATA_DIR "/sdp/ui/title.ui" */
+#define UI_TITLE "src/title.ui"
+#define UI_STORY "src/story.ui"
+#define UI_STATUS "src/status.ui" // "src/status.ui"
 
 //Top level windows used in each screen
 GtkWidget *window;

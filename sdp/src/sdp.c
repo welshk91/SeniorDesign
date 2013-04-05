@@ -23,9 +23,9 @@
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR "/sdp/ui/title.ui" */
-#define UI_TITLE "src/title.ui"
-#define UI_STORY "src/story.ui"
-#define UI_STATUS "src/status.ui" // "src/status.ui"
+#define UI_TITLE "title.ui"
+#define UI_STORY "story.ui"
+#define UI_STATUS "status.ui" // "src/status.ui"
 
 //Top level windows used in each screen
 GtkWidget *window;
