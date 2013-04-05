@@ -474,7 +474,7 @@ static void acceptTime (void)
 
 		gtk_widget_show_all (GTK_WIDGET (window3));
 	
-		printf("Turns Left (out of 50): %d \n",turnCountdown);
+		printf("Turns Left: %d \n",turnCountdown);
 	}
 
 }//end of AcceptTime
