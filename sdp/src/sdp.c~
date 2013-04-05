@@ -23,9 +23,9 @@
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/sdp/ui/title.ui" */
-#define UI_TITLE "src/title.ui"
-#define UI_STORY "src/story.ui"
-#define UI_STATUS "src/status.ui"
+#define UI_TITLE "/sdp/ui/title.ui"
+#define UI_STORY "/sdp/ui/story.ui"
+#define UI_STATUS "src/status.ui" //src/status.ui
 
 //Top level windows used in each screen
 GtkWidget *window;
@@ -162,7 +162,7 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 			pickedWater = 1;
 		}
 		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Plow")==0){
-			pickedLPlow = 1;
+			pickedPlow = 1;
 		}
 
 		numChoices++;
