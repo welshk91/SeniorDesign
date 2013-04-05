@@ -27,6 +27,12 @@
 #define UI_STORY "story.ui"
 #define UI_STATUS "status.ui" // "src/status.ui"
 
+//Image Locations
+#define IMAGE_CRAPPY "crappy_soil.jpg"
+#define IMAGE_BAD "bad_soil.jpg"
+#define IMAGE_OK "ok_soil.jpg"
+#define IMAGE_NICE "nice_soil.jpg"
+
 //Top level windows used in each screen
 GtkWidget *window;
 GtkWidget *window2;
@@ -92,7 +98,7 @@ gchar *tipEntry2;
 gchar *tipEntry3;
 
 //Image path
-gchar *imagePath = "src/crappy_soil.jpg";
+gchar *imagePath = IMAGE_CRAPPY;
 
 //Number of "job" selections the player has made 
 int numChoices = 0;
@@ -441,7 +447,7 @@ static void acceptTime (void)
 		/*Image for Soil View*/
 		if(turnCountdown<48){
 			printf("here cd: %d \n",turnCountdown);
-			imagePath = "src/nice_soil.jpg";
+			imagePath = IMAGE_NICE;
 			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 			soilImage = gtk_image_new_from_file (imagePath);
 			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
@@ -451,10 +457,9 @@ static void acceptTime (void)
 		}
 		else if(turnCountdown<49){
 			printf("HERE COUNTDOWN: %d \n",turnCountdown);
-			imagePath = "src/ok_soil.jpg";
+			imagePath = IMAGE_OK;
 			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
-
 		}
 
 		GValue value = {0,};
