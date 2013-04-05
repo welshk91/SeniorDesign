@@ -27,7 +27,10 @@ sdp_SOURCES = \
 	sdp.h \
 	sdp.c \
 	ok_soil.jpg \
+	ok_soil.jpg \
 	nice_soil.jpg \
+	bad_soil.jpg \
+	sdp.c \
 	bad_soil.jpg \
 	crappy_soil.jpg	
 
