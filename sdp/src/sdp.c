@@ -66,16 +66,16 @@ int water = 0;
 int plow = 0;
 int numberTurns = 0;
 int numberActions = 0;
-int turnCountdown = 50;
+int turnCountdown = 10;
 
 /*  Buffers that can carry 24 digit numbers 
-	probably overkill but solves buffer overflow problems on certain configs
-*/
-char oxygenBuf[24];
-char carbonBuf[24];
-char phosphorusBuf[24];
-char nitrogenBuf[24];
-char waterBuf[24];
+ probably overkill but solves buffer overflow problems on certain configs
+ */
+char oxygenLvlBuf[24];
+char carbonLvlBuf[24];
+char phosphorusLvlBuf[24];
+char nitrogenLvlBuf[24];
+char waterLvlBuf[24];
 char cloverBuf[24];
 char thornBuf[24];
 char ryeBuf[24];
@@ -176,7 +176,7 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 
 	else {
 		/* If control reaches here, the toggle button is up */
-	
+
 		/*Change variable 'picked' to false*/
 		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Crimson\nClover")==0){
 			pickedClover = 0;
@@ -216,9 +216,72 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 		}
 
 		numChoices--;
+	}	
+}
+
+//Method for Ending Game
+static void endingTime (void)
+{
+	GtkBuilder *builder;
+	GError* error = NULL;
+
+	//Load UI from file
+	builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, UI_STATUS, &error))
+	{
+		g_critical ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
 	}
 
-	
+	/* Auto-connect signal handlers */
+	gtk_builder_connect_signals (builder, NULL);
+
+	GtkWidget *dialog;	
+
+	if(oxygenLvl>70){
+		printf("You did an amazing job");
+
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtk_builder_get_object(builder,"window3")),
+		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                 GTK_MESSAGE_INFO,
+		                                 GTK_BUTTONS_CLOSE,    
+		                                 "You did an amazing job!");
+	}
+	else if(oxygenLvl>50){
+		printf("You did an okay job");
+
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtk_builder_get_object(builder,"window3")),
+		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                 GTK_MESSAGE_INFO,
+		                                 GTK_BUTTONS_CLOSE,    
+		                                 "You did an okay job.");
+	}
+	else if(oxygenLvl>25){
+		printf("You could have done a better job");
+
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtk_builder_get_object(builder,"window3")),
+		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                 GTK_MESSAGE_INFO,
+		                                 GTK_BUTTONS_CLOSE,    
+		                                 "You could have done a better job.");
+
+	}
+	else{
+		printf("You shouldn't give up your day job");
+
+		dialog = gtk_message_dialog_new (GTK_WINDOW(gtk_builder_get_object(builder,"window3")),
+		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                 GTK_MESSAGE_INFO,
+		                                 GTK_BUTTONS_CLOSE,    
+		                                 "You shouldn't give up your day job.");
+
+	}
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+
+	exitTime();
 }
 
 //Method for Accept Button (next turn)
@@ -268,7 +331,7 @@ static void acceptTime (void)
 		                                 "You picked too few choices for a single turn!\nYou can only pick two.");
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
-		
+
 	}
 
 	//You picked the right amount
@@ -340,7 +403,7 @@ static void acceptTime (void)
 				}
 				if(pickedWillow){
 					printf("You chose Willow \n");
-					water = water - 10;
+					waterLvl = waterLvl - 10;
 					willow++;
 				}
 				if(pickedTill){
@@ -350,7 +413,7 @@ static void acceptTime (void)
 				}
 				if(pickedWater){
 					printf("You chose Water \n");
-					water = water + 10;
+					waterLvl = waterLvl + 10;
 					water++;
 				}
 				if(pickedPlow){
@@ -383,11 +446,11 @@ static void acceptTime (void)
 
 		/*Update Stats Screen*/
 		//Make a string with the integer values
-		sprintf(oxygenBuf, "%d", oxygenLvl);
-		sprintf(carbonBuf, "%d", carbonLvl);
-		sprintf(phosphorusBuf, "%d", phosphorusLvl);
-		sprintf(nitrogenBuf, "%d", nitrogenLvl);
-		sprintf(waterBuf, "%d", waterLvl);
+		sprintf(oxygenLvlBuf, "%d", oxygenLvl);
+		sprintf(carbonLvlBuf, "%d", carbonLvl);
+		sprintf(phosphorusLvlBuf, "%d", phosphorusLvl);
+		sprintf(nitrogenLvlBuf, "%d", nitrogenLvl);
+		sprintf(waterLvlBuf, "%d", waterLvl);
 		sprintf(cloverBuf, "%d", clover);
 		sprintf(thornBuf, "%d", thorn);
 		sprintf(ryeBuf, "%d", rye);
@@ -406,11 +469,11 @@ static void acceptTime (void)
 		//The text displayed in Stats, formatted
 		statsEntry = g_strconcat("\t\tStats\n\n\
 	Levels\n\
-	\tOxygen: ", oxygenBuf, "\n\
-	\tCarbon: ", carbonBuf, "\n\
-	\tPhosphorus: ", phosphorusBuf,"\n\
-	\tNitrogen: ", nitrogenBuf,"\n\
-	\tWater: ", waterBuf,"\n\n\
+	\tOxygen: ", oxygenLvlBuf, "\n\
+	\tCarbon: ", carbonLvlBuf, "\n\
+	\tPhosphorus: ", phosphorusLvlBuf,"\n\
+	\tNitrogen: ", nitrogenLvlBuf,"\n\
+	\tWater: ", waterLvlBuf,"\n\n\
 	Plants\n\
 	\tCrimson Clover: ", cloverBuf,"\n\
 	\tBoxthorn: ", thornBuf,"\n\
@@ -446,7 +509,7 @@ static void acceptTime (void)
 			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 			soilImage = gtk_image_new_from_file (imagePath);
 			gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
-			
+
 			gtk_widget_show_all(GTK_WIDGET(soilImage));
 
 		}
@@ -468,8 +531,14 @@ static void acceptTime (void)
 		printf("\nFilename = %s\n", g_value_get_string(&value));
 
 		gtk_widget_show_all (GTK_WIDGET (window3));
-	
+
 		printf("Turns Left: %d \n",turnCountdown);
+
+		//End Game
+		if(turnCountdown==0){
+			endingTime();
+		}
+
 	}
 
 }//end of AcceptTime
@@ -501,7 +570,7 @@ static void continueTime(void)
 	/*Image for Soil View*/
 	soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 	gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
-			
+
 	/*Turns label
 	 * Can't seem to update turn label with correct number of turns. 
 	 */
@@ -515,11 +584,11 @@ static void continueTime(void)
 	gtk_text_buffer_get_iter_at_offset(buffer3, &iter3, 0);
 
 	//Make a string with the integer values
-	sprintf(oxygenBuf, "%d", oxygenLvl);
-	sprintf(carbonBuf, "%d", carbonLvl);
-	sprintf(phosphorusBuf, "%d", phosphorusLvl);
-	sprintf(nitrogenBuf, "%d", nitrogenLvl);
-	sprintf(waterBuf, "%d", waterLvl);
+	sprintf(oxygenLvlBuf, "%d", oxygenLvl);
+	sprintf(carbonLvlBuf, "%d", carbonLvl);
+	sprintf(phosphorusLvlBuf, "%d", phosphorusLvl);
+	sprintf(nitrogenLvlBuf, "%d", nitrogenLvl);
+	sprintf(waterLvlBuf, "%d", waterLvl);
 	sprintf(cloverBuf, "%d", clover);
 	sprintf(thornBuf, "%d", thorn);
 	sprintf(ryeBuf, "%d", rye);
@@ -538,11 +607,11 @@ static void continueTime(void)
 	//The text displayed in Stats
 	statsEntry = g_strconcat("\t\tStats\n\n\
 	Levels\n\
-	\tOxygen: ", oxygenBuf, "\n\
-	\tCarbon: ", carbonBuf, "\n\
-	\tPhosphorus: ", phosphorusBuf,"\n\
-	\tNitrogen: ", nitrogenBuf,"\n\
-	\tWater: ", waterBuf,"\n\n\
+	\tOxygen: ", oxygenLvlBuf, "\n\
+	\tCarbon: ", carbonLvlBuf, "\n\
+	\tPhosphorus: ", phosphorusLvlBuf,"\n\
+	\tNitrogen: ", nitrogenLvlBuf,"\n\
+	\tWater: ", waterLvlBuf,"\n\n\
 	Plants\n\
 	\tCrimson Clover: ", cloverBuf,"\n\
 	\tBoxthorn: ", thornBuf,"\n\
