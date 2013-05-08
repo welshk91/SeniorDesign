@@ -3,10 +3,10 @@
 Geometry=1678x988+0+31
 
 [Project Manager]
-Shortcut=sdp//sdp//src//sdp
+Shortcut=sdp
 
 [File Loader]
-Files=file:///home/kev/sdp/src/sdp.c#1%%%file:///home/kev/sdp/src/main.c#43%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui
+Files=file:///home/kev/sdp/src/sdp.c#425%%%file:///home/kev/sdp/src/main.c#43%%%file:///home/kev/Programs/SeniorDesign/sdp/src/status.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/title.ui%%%file:///home/kev/Programs/SeniorDesign/sdp/src/story.ui
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
