@@ -4,6 +4,13 @@ Soil Time!
 This program is a simple prototype for an educational game. Hopefully it can be added to by other developers.
 
 
+Dependencies
+----------------
+* intltool
+* gtk3-devel (Fedora) or libgtk-3-dev (Ubuntu)
+* glib
+* gtk3
+
 User Manual
 -----------------
 	Instructions:
@@ -46,5 +53,5 @@ Known Issues
 
 Resources
 -----------------------------------
-[EcoReality](http://www.ecoreality.org/wiki/Plant_used_for/Soil_stabilization)
-[Theodore Payne Foundation](http://www.theodorepayne.org/plants/plants_for_erosion_control.htm)
+* [EcoReality](http://www.ecoreality.org/wiki/Plant_used_for/Soil_stabilization)
+* [Theodore Payne Foundation](http://www.theodorepayne.org/plants/plants_for_erosion_control.htm)
