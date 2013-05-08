@@ -22,10 +22,9 @@
 #include <glib/gi18n.h>
 
 /* For testing propose use the local (not installed) ui file */
-/* #define UI_FILE PACKAGE_DATA_DIR "/sdp/ui/title.ui" */
 #define UI_TITLE "title.ui"
 #define UI_STORY "story.ui"
-#define UI_STATUS "status.ui" // "src/status.ui"
+#define UI_STATUS "status.ui"
 
 //Image Locations
 #define IMAGE_CRAPPY "crappy_soil.jpg"
@@ -69,27 +68,29 @@ int numberTurns = 0;
 int numberActions = 0;
 int turnCountdown = 50;
 
-//Buffers that can carry 8 digit numbers, probably overkill but solves buffer overflow problems
-char oxygenBuf[8];
-char carbonBuf[8];
-char phosphorusBuf[8];
-char nitrogenBuf[8];
-char waterBuf[8];
-char cloverBuf[8];
-char thornBuf[8];
-char ryeBuf[8];
-char sumacBuf[8];
-char bearberryBuf[8];
-char salviaBuf[8];
-char alderBuf[8];
-char dogwoodBuf[8];
-char willowBuf[8];
-char tillBuf[8];
-char waterBuf[8];
-char plowBuf[8];
-char turnsBuf[8];
-char actionsBuf[8];
-char countdownBuf[8];
+/*  Buffers that can carry 24 digit numbers 
+	probably overkill but solves buffer overflow problems on certain configs
+*/
+char oxygenBuf[24];
+char carbonBuf[24];
+char phosphorusBuf[24];
+char nitrogenBuf[24];
+char waterBuf[24];
+char cloverBuf[24];
+char thornBuf[24];
+char ryeBuf[24];
+char sumacBuf[24];
+char bearberryBuf[24];
+char salviaBuf[24];
+char alderBuf[24];
+char dogwoodBuf[24];
+char willowBuf[24];
+char tillBuf[24];
+char waterBuf[24];
+char plowBuf[24];
+char turnsBuf[24];
+char actionsBuf[24];
+char countdownBuf[24];
 
 //Entries for the Text Views
 gchar *statsEntry;
@@ -97,13 +98,13 @@ gchar *tipEntry1;
 gchar *tipEntry2;
 gchar *tipEntry3;
 
-//Image path
+//Image path, defaults to crappy soil image
 gchar *imagePath = IMAGE_CRAPPY;
 
 //Number of "job" selections the player has made 
 int numChoices = 0;
 
-//If a certain plant is picked
+//Keeps track of which plants were picked
 int pickedClover = 0;
 int pickedThorn = 0;
 int pickedRye = 0;
@@ -131,7 +132,6 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
 		/* If control reaches here, the toggle button is down */
-		//printf("GTKWidget %s is down \n", gtk_button_get_label (GTK_BUTTON(widget)));
 
 		/*Change variable 'picked' to true*/
 		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Crimson\nClover")==0){
@@ -176,8 +176,7 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 
 	else {
 		/* If control reaches here, the toggle button is up */
-		//printf("GTKWidget %s is up \n", gtk_button_get_label (GTK_BUTTON(widget)));
-
+	
 		/*Change variable 'picked' to false*/
 		if(strcmp(gtk_button_get_label(GTK_BUTTON(widget)),"Crimson\nClover")==0){
 			pickedClover = 0;
@@ -219,14 +218,12 @@ void toggle_button_callback (GtkWidget *widget, gpointer data)
 		numChoices--;
 	}
 
-	//printf("COUNT:%d \n", numChoices);
-
+	
 }
 
-//Method for Accept
+//Method for Accept Button (next turn)
 static void acceptTime (void)
 {
-
 	GtkBuilder *builder;
 	GError* error = NULL;
 
@@ -301,9 +298,6 @@ static void acceptTime (void)
 
 			//Accept Button was Pressed
 			case GTK_RESPONSE_OK:
-				//printf("You chose %d actions \n", numChoices);
-
-				//Display choices the user made
 				if(pickedClover){
 					printf("You chose Crimson Clover \n");
 					oxygenLvl = oxygenLvl + 5;
@@ -409,7 +403,7 @@ static void acceptTime (void)
 		sprintf(turnsBuf, "%d", numberTurns);
 		sprintf(actionsBuf, "%d", numberActions);
 
-		//The text displayed in Stats
+		//The text displayed in Stats, formatted
 		statsEntry = g_strconcat("\t\tStats\n\n\
 	Levels\n\
 	\tOxygen: ", oxygenBuf, "\n\
@@ -444,9 +438,10 @@ static void acceptTime (void)
 		gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
 		//gtk_label_set_label(GTK_LABEL(turnsLeft), countdownBuf);
 
-		/*Image for Soil View*/
+		/* Image for Soil View
+		 * Doesn't seem to work. Looks like a refresh/update issue
+		 */
 		if(oxygenLvl>70){
-			//printf("here cd: %d \n",turnCountdown);
 			imagePath = IMAGE_NICE;
 			soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 			soilImage = gtk_image_new_from_file (imagePath);
@@ -507,7 +502,9 @@ static void continueTime(void)
 	soilImage = GTK_WIDGET(gtk_builder_get_object(builder, "image1"));
 	gtk_image_set_from_file (GTK_IMAGE (soilImage), imagePath);
 			
-	/*Turns label*/
+	/*Turns label
+	 * Can't seem to update turn label with correct number of turns. 
+	 */
 	//turnsLeft = GTK_WIDGET(gtk_builder_get_object(builder,"labelTurns"));
 	//sprintf(countdownBuf, "%d Turns Left", turnCountdown);
 	//gtk_label_set_text(GTK_LABEL(turnsLeft), countdownBuf);
@@ -791,7 +788,10 @@ sdp_new_window (GApplication *app,
 }
 
 
-/* GApplication implementation */
+/*
+ * Not quite sure what this code does
+ * This was skeleton code produced by my IDE
+ */
 static void
 sdp_activate (GApplication *application)
 {
@@ -819,7 +819,6 @@ sdp_init (Sdp *object)
 static void
 sdp_finalize (GObject *object)
 {
-
 	G_OBJECT_CLASS (sdp_parent_class)->finalize (object);
 }
 
