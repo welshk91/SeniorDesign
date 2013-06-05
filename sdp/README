@@ -4,6 +4,13 @@ Soil Time!
 This program is a simple prototype for an educational game. Hopefully it can be added to by other developers.
 
 
+Dependencies
+----------------
+* intltool
+* gtk3-devel (Fedora) or libgtk-3-dev (Ubuntu)
+* glib
+* gtk3
+
 User Manual
 -----------------
 	Instructions:
@@ -38,7 +45,6 @@ Known Issues
 ----------------------------------
 * The turns are implemented correctly in the code, but the GUI can't refresh to show the proper number of turns
 * The image also never refreshes. I can change the "File" the image is taken from, but the new image is never shown.
-* Since turns aren't implented fully, I haven't implemented an "End Game" scenario. Shouldn't be too difficult considering the levels are implemented correctly and you could just compare levels to what they should be.
 * Tips is currently just a static place holder.
 * The educational aspects are not be correct. I don't have much knowledge in this field. The plants currently affect random levels (ie Alder changes carbon levels). Contact a professional in this field to compare notes with.
 * Scaling isn't great. Resizing the widets makes certain parts of the GUI look awkward.
@@ -46,5 +52,5 @@ Known Issues
 
 Resources
 -----------------------------------
-[EcoReality](http://www.ecoreality.org/wiki/Plant_used_for/Soil_stabilization)
-[Theodore Payne Foundation](http://www.theodorepayne.org/plants/plants_for_erosion_control.htm)
+* [EcoReality](http://www.ecoreality.org/wiki/Plant_used_for/Soil_stabilization)
+* [Theodore Payne Foundation](http://www.theodorepayne.org/plants/plants_for_erosion_control.htm)
