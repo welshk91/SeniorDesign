@@ -46,7 +46,7 @@ Known Issues
 * The turns are implemented correctly in the code, but the GUI can't refresh to show the proper number of turns
 * The image also never refreshes. I can change the "File" the image is taken from, but the new image is never shown.
 * Tips is currently just a static place holder.
-* The educational aspects are not be correct. I don't have much knowledge in this field. The plants currently affect random levels (ie Alder changes carbon levels). Contact a professional in this field to compare notes with.
+* The educational aspects are not correct. I don't have much knowledge in this field. The plants currently affect random levels (ie Alder changes carbon levels). I should contact a professional in this field to compare notes with.
 * Scaling isn't great. Resizing the widets makes certain parts of the GUI look awkward.
 * Options not implemented
 
