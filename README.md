@@ -6,6 +6,12 @@ This program is a simple prototype for an educational game. Hopefully it can be 
 Screen Shots
 -------------
 ![Title](Screen\ Shots\ \&\ Artwork/Screenshot\ -\ Title.png)
+![Story](Screen\ Shots\ \&\ Artwork/Screenshot\ -\ Story\ Board.png)
+![Plants](Screen\ Shots\ \&\ Artwork/Screenshot\ -\ Plants.png)
+![SoilView](Screen\ Shots\ \&\ Artwork/Screenshot\ -\ Soil\ View.png)
+![Almanac](Screen\ Shots\ \&\ Artwork/Screenshot\ -\ Almanac.png)
+![Tip](Screen\ Shots\ \&\ Artwork/Screenshot\ -\ Tip.png)
+
 
 Dependencies
 ----------------
