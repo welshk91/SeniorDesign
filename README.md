@@ -5,8 +5,7 @@ This program is a simple prototype for an educational game. Hopefully it can be 
 
 Screen Shots
 -------------
-![Title](Screen\/Shots\/&\/Artwork/Screenshot\/-\/Title.png)
-
+![Title](Screen\ Shots\ \&\ Artwork/Screenshot\ -\ Title.png)
 
 Dependencies
 ----------------
