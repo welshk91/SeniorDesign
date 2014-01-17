@@ -3,6 +3,10 @@ Soil Time!
 
 This program is a simple prototype for an educational game. Hopefully it can be added to by other developers.
 
+Screen Shots
+-------------
+![Title](Screen\/Shots\/&\/Artwork/Screenshot\/-\/Title.png)
+
 
 Dependencies
 ----------------
